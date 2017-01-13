@@ -18,7 +18,7 @@ var connection = mysql.createConnection({
 // 默认页
 router.get('/',function (req,res,next){
   var renderData = {
-    title: "诗友圈"
+    title: "triplong"
   };
   res.render('index/pc', renderData);
 });
