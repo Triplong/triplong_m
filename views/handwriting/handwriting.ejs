@@ -1,0 +1,163 @@
+<%- include ../global/header.ejs %>
+<%- include ../global/top.ejs %>
+<style>
+</style>
+<link rel="stylesheet" href="css/handwriting/handwriting_file.css">
+
+<div class="main-content">
+	
+	<div class="col-lg-12">
+		<br>
+		<!-- 诗详情 -->
+		<% if(rows_poems.length>0){ 
+			rows_poems.forEach(function(el){ %>
+			<h4 class="text-left" fileId="<%=el.id%>">
+				<a href="poems?id=<%=el.id%>">
+					<i class="icon icon-angle-left"></i>
+					<span><%=el.title%></span>
+				</a>
+				<small><%=el.authorName%></small>
+				<span style="float:right;">
+					<i class="icon icon-reorder"></i>
+				</span>
+			</h4>
+			<hr>
+			<p class="lead">
+				<%-el.content.replace(/\r/ig,'<br/>').replace(/\n/ig,'<br/>')%>
+			</p>
+			<% })
+		}%>
+
+	</div>
+	<div class="col-lg-12 handwriting-div" style="padding:0;">
+		<p class="col-lg-12 msg-tips">
+			<span>小提示：</span>你可以选择写完全诗，也可以选择写你喜欢的诗句。
+		</p>
+		<hr>
+		<!-- 诗笔迹列表 -->
+		<% if(rows_files.length>0){ 
+			rows_files.sort(function(a,b){
+				return b.like_num - a.like_num;
+			})
+			var i = 0;
+			rows_files.forEach(function(el){ %>
+			<h4 class="text-center img-each" index="<%=i%>" fileId="<%=el.id%>">
+				<p class="col-lg-12 small text-right">
+					<span style="float:left;">
+						<%if (el.is_original==1) {%>
+							<span class="badge">原创</span>
+						<%}%>
+						<%if(el.file_type==1){%>
+							<!-- <span class="badge">图片</span> -->
+						<%}else if (el.file_type==2) {%>
+							<span class="badge">小视频</span>
+						<%}%>
+						<%if (el.authorName!=''&&el.authorName!=null) {%>
+							<span>by</span>
+							<span><a href=""><%-el.authorName%></a></span>
+						<%}%>
+					</span>
+					<span>
+						<%if(el.created_at!=''&&el.created_at!=null){%>
+							<span><%-new Date(el.created_at).Format("yyyy-MM-dd hh:mm:ss")%></span>
+						<%}%>
+						<a href="javascript:;" thisId="<%=el.id%>" onclick="edit_hw_file(this)">
+							<span><i class="icon icon-info-sign"></i></span>
+						</a>
+					</span>
+				</p>
+
+				<%if(el.file_type==1){ 
+					photoCut = '?imageView2/1/w/500/h/500';
+				%> 
+					<img src="<%=qiniuDoname%><%=el.file_name%><%=photoCut%>" alt="">
+				<%}else if (el.file_type==2){%>
+					<video src="<%=qiniuDoname%><%=el.file_name%>" alt=""></video>
+				<%}%>
+				
+				<p class="col-lg-12 img-operation-p text-right">
+					<span class="label label-info img-operation">
+						<span status="0" onclick="changeLikeStatus(this)">
+							<i class="icon icon-heart-empty"></i>
+							<%if (el.like_num==null || el.like_num=='null') {
+								el.like_num = 0;
+							}%>
+							<span class="likeNum lead"><%=el.like_num%></span>
+						</span>
+					</span>
+				</p>
+				<%if (el.description!='') {%>
+					<p class="col-lg-12 small p-description text-left">
+						<span><%-el.description%></span>
+					</p>
+				<%}%>
+
+				
+			</h4>
+			<hr>
+			<% i++})
+		}%>
+
+		<p class="text-center">
+			<span class="btn btn-info" onclick="show_upload_new_hw_div(this)">上传我的笔迹</span>
+		</p>
+
+		<form id="upload_form" enctype="multipart/form-data" method="post" action="" class="text-center">
+		    <input type="file" name="qiniu_upload_file" id="qiniu_upload_file" onchange="uploadMyHaddwriting()" multiple="multiple" accept="image/*" class="hide">
+		    <span class="btn btn-info" onclick="click_prev_input(this)">上传我的笔迹</span>
+		</form>
+
+		<br>
+
+		<form id="upload_form" enctype="multipart/form-data" method="post" action="" class="text-center hide">
+		    <input type="file" name="qiniu_upload_file" id="qiniu_upload_file" onchange="uploadMyHaddwriting()" multiple="multiple" accept="video/*" class="hide">
+		    <span class="btn btn-info" onclick="click_prev_input(this)">上传我的小视频</span>
+		</form>
+
+		<hr>
+
+		<!-- 全局 -->
+		<p class="bg-info text-center hide">
+			<a href="poems">列表</a>		
+			<a href="poems?act=add">增加</a>
+			<a href="poems?act=correction">纠错</a>
+		</p>
+		<p class="bg-success text-center hide">
+			<abbr title="attribute">attr</abbr>
+			<abbr title="HyperText Markup Language" class="initialism">HTML</abbr>
+			<p class="text-center">
+				<abbr>WePoem 微诗 CopyRight</abbr>
+			</p>
+			<br>
+		</p>
+
+	</div>
+
+</div>
+
+<div class="upload-new-hw-div hide">
+	<div class="new-hw-header text-center col-lg-12">
+		<span class="float-left" onclick="hide_upload_new_hw_div(this)">取消</span>
+		<span>诗笔迹</span>
+		<span class="float-right btn btn-default btn-xs btn-pre-publish">发布</span>
+	</div>
+</div>
+
+
+
+<script>
+	var qiniuDoname = <%-JSON.stringify(qiniuDoname)%>;
+	var rows_poems = <%-JSON.stringify(rows_poems)%>;
+	var rows_files = <%-JSON.stringify(rows_files)%>;
+	// console.log(qiniuDoname,rows_files,rows_poems);
+	// 
+	$(document).ready(function(){
+		$('.nav-common').addClass('hide');
+	})	
+</script>
+
+<%- include ../global/bottom.ejs %>
+<script src="js/handwriting/handwriting.js"></script>
+<script src="js/basic/qiniu-upload.js"></script>
+<script src="js/poems/search.js"></script>
+<%- include ../global/footer.ejs %>

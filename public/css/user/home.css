@@ -1,0 +1,161 @@
+.layui-m-layerchild h3{
+    height: 44px;
+    line-height: 44px;
+    background: -webkit-linear-gradient(left,#96b973,#44BFFA);
+    background: linear-gradient(to right,#96b973,#44BFFA);
+}
+.layui-m-layercont {
+    padding: 15px;
+}
+
+.p-email input {
+    width: 25rem;
+    height: 44px;
+    font-size: 15px;
+    border: solid 1px #46c0fa;
+    padding: 0 15px;
+    border-radius: 0;
+    background: white;
+}
+.p-email button{
+    width: 25rem;
+    height: 44px;
+    font-size: 15px;
+    border: solid 1px #46c0fa;
+    padding: 0 15px;
+    border-radius: 0;
+    background: #46c0fa;
+    color: white;
+}
+
+.btn-close-m{
+    border-radius: 100%;
+    font-weight: lighter;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    background: -webkit-linear-gradient(top,#96b973,#44BFFA);
+    background: linear-gradient(to bottom,#96b973,#44BFFA);
+}
+
+
+.home-info{
+    width: 100%;
+    margin-top: 1.5rem;
+    background: white;
+}	
+.eidt-user-info-div .home-info{
+    margin-top: 0rem;
+    border-bottom: solid 1px rgba(227, 227, 227, 0.5);
+}
+.home-info-0{
+    padding: 1rem;
+    height: 8rem;
+}
+.home-info-1{
+    padding: 1rem;
+    height: 5rem;
+}
+.home-info img{
+	height: 100%;
+}
+.home-info ul{
+    margin: 0;
+    padding: 0;
+    font-size: 1.6rem;
+}
+.home-info-0 ul{
+    height: 6rem;
+}
+.home-info-1 ul{
+    height: 3rem;
+}
+.home-info p{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.home-info li{
+    height: 100%;
+    line-height: 100%;
+    vertical-align: middle;
+}
+
+.home-info li.user-name {
+    padding: 1rem 0;
+}
+.home-info li.user-name p{
+    height: 2rem;
+    line-height: 2rem;
+}
+
+.home-info .grey {
+    font-size: 1.5rem;
+    color: #909090!important;
+    font-weight: lighter;
+}
+.home-info li.left-title {
+    padding: 0.8rem 0;
+    margin-left: 0.8rem;
+}
+.home-info-0 li.left-title {
+    padding: 2.3rem 0!important;
+}
+.home-info li.right-value {
+	float: right;
+    padding: 0.8rem 0;
+    margin-right: 0.8rem;
+}
+
+.eidt-user-info-div {
+	position: fixed;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    height: 100%;
+    overflow-y:scroll; 
+    background: #f6f6f1;
+    top: 0;
+    z-index: 1;
+}
+.eidt-user-info-h {
+    height: 5rem;
+    line-height: 5rem;
+    background: #ffffff;
+    padding: 0 1.5rem;
+    font-size: 1.6rem;
+    border-bottom: solid 1px #d9d9d9;
+}
+span.badge{
+    /*font-weight: lighter;*/
+    font-size: 1.2rem;
+    background: white;
+    color: #dedede;
+    border: solid 1px #dedede;
+}
+span.badge.ok{
+    color: #ffffff;
+    border: solid 1px #03A9F4;
+    background: #03A9F4;
+}
+.eidt-user-info-h .back-btn{
+    float: left;
+    position: absolute;
+    left: 0;
+    padding: 0 1.5rem;
+}
+
+.h1, .h2, .h3, h1, h2, h3{
+    margin: 0!important;
+}
+
+
+/*.my-email{
+    width: 80%;
+    margin: 0 auto;
+    height: 3rem;
+    font-size: 1.8rem;
+    border: none;
+    /*border-bottom: solid 1px rgba(227, 227, 227, 0.5);*/
+}*/
+

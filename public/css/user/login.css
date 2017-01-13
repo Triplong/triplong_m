@@ -1,0 +1,55 @@
+*,*:hover,*:active,*:visited,*:link,*:focus{
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
+    outline:none;
+    /*background: none;*/
+    text-decoration: none;
+}
+
+/*在IOS下，input 表单默认会有个内阴影，一定程度上影响视觉一致，可通过设置下面代码去掉：*/
+input{
+    -webkit-appearance: none;
+}
+
+.login-div input{
+    width: 30rem;
+    height: 44px;
+    font-size: 15px;
+    border: solid 1px #46c0fa;
+    padding: 0 15px;
+    border-radius: 0;
+    background: none;
+}
+.login-div button{
+    width: 30rem;
+    height: 44px;
+    border: solid 1px #46c0fa;
+    background: #46c0fa;
+    color: white;
+    font-size: 18px;    
+}
+.login-div button.no-bg{
+    background: none;
+    font-size: 15px;
+}
+
+span.iconfont{
+	font-size: 1.4rem;
+	padding: 5px 10px;
+	margin: 0 1px;
+	border-radius: 2px;
+}
+span.iconfont img{
+	height: 18px;
+}
+span.iconfont.i-weixin {
+    color: #ecf0f1;
+    border: solid 1px #11cd6e;
+    background: #11cd6e;    
+}
+
+span.iconfont.i-weibo {
+    color: #ecf0f1;
+    border: solid 1px #eb4f38;
+    background: #eb4f38;
+}

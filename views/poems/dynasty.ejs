@@ -1,0 +1,37 @@
+<%- include ../global/header.ejs %>
+
+<%- include ../global/top.ejs %>
+<style>
+	
+</style>
+
+<div class="container">
+	
+	<div class="data-poems-list col-lg-12">
+
+		<!-- 列表 -->
+		<% if(rows.length>0){ 
+			rows.forEach(function(el){ %>
+			<h4 class="text-left">
+				<a href="dynasty?id=<%=el.id%>"><%=el.d_name%></a>
+				<small><%-el.start_y%>-<%-el.end_y%></small>
+				<%if (el.include!=''&&el.include!=null) {%>
+					<small>(<%-el.include%>)</small>
+				<%}%>
+			</h4>
+			<% })
+		}%>
+		
+	</div>
+
+</div>
+
+<script>
+	var rows = <%-JSON.stringify(rows)%>;
+</script>
+
+<%- include ../global/bottom.ejs %>
+
+<script src="js/poems/search.js"></script>
+
+<%- include ../global/footer.ejs %>

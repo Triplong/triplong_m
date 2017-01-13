@@ -1,0 +1,292 @@
+<%- include ../global/header.ejs %>
+
+<%- include ../global/top.ejs %>
+<style>
+	
+</style>
+<link rel="stylesheet" href="css/poems/poems.css">
+
+<div class="container">
+	
+	<div class="data-poems-list col-lg-12">
+
+		<!-- 列表 -->
+		<% if(act_status==-1 && rows.length>0){ 
+			rows.forEach(function(el){ %>
+			<h4 class="text-left">
+				<a href="poems?id=<%=el.id%>"><%=el.title%></a>
+				<small><%=el.authorName%></small>
+			</h4>
+			<% })
+		}%>
+
+		<!-- 详情 -->
+		<% if(act_status==0 && rows.length>0){ 
+			rows.forEach(function(el){ %>
+			
+			<div class="resize-full-div">
+				<img src="" class="backupImg" alt="">
+				<span class="resize-full-btn" status="1">
+					<span onclick="hide_resize_full_div()">
+						<i class="icon icon-resize-small"></i>
+					</span>
+					<br>
+					<br>
+					<span onclick="next_resize_full_bg()">
+						<i class="icon icon-picture"></i>
+					</span>
+					<br>
+					<br>
+					<span onclick="next_resize_full_color()">
+						<i class="icon icon-font"></i>
+					</span>
+					<br>
+					<br>
+					<!-- <span onclick="toCanvasImg()">
+						<i class="icon icon-camera"></i>
+					</span>
+					<br>
+					<br> -->
+					<span onclick="hide_resize_full_btn()">
+						<i class="icon icon-chevron-up"></i>
+					</span>
+					<br>
+				</span>
+
+				<div class="resize_full_content" onclick="show_resize_full_btn()">
+					<h4 class="text-left">
+						<%=el.title%>
+					</h4>
+					<p>
+						<small><%=el.authorName%></small>
+					</p>
+					<p class="lead">
+						<%-el.content.replace(/\r/ig,'<br/>').replace(/\n/ig,'<br/>')%>
+					</p>
+				</div>
+			</div>
+
+
+			<blockquote>
+				<%if (el.content.length>0) {%>
+					<span class="resize-full-btn" onclick="show_resize_full_div()">
+						<i class="icon icon-resize-full"></i>
+					</span>
+				<%}%>
+
+				<h4 class="text-left">
+					<%=el.title%>
+				</h4>
+				<p class="lead">
+					<%-el.content.replace(/\r/ig,'<br/>').replace(/\n/ig,'<br/>')%>
+				</p>
+				<%if (el.authorName!=''&&el.authorName!=null) {%>
+					<footer>
+						<%if(el.dynasty!=''&&el.dynasty!=null){%>
+							<a href="dynasty" dynastyId="<%=el.dynastyId%>"><%=el.dynasty%></a>
+						<%}%>
+						<%if(el.country!=''&&el.country!=null){%>
+							<a href="javascript:;" dynastyId="<%=el.dynastyId%>"><%=el.country%></a>
+						<%}%>
+						<a href="javascript:;" authorId="<%=el.authorId%>"><%=el.authorName%></a>
+						
+						<cite title="Source Title">
+							<%=el.time_place%>
+						</cite>
+						
+						<a href="poems?id=<%=el.id%>&act=edit" class="text-right hide">
+							<i class="icon icon-pencil"></i>
+						</a>
+					</footer>
+				<%}%>
+
+			</blockquote>
+
+			<span>
+				<i class="icon icon-bookmark-empty"></i>
+			</span>
+			<span class="label label-info label-xs">
+				<% if (el.language==0){%>
+					<%if (el.times==0) {%>
+						<span>A</span>
+					<%}else if(el.times==1){%>
+						<span>P</span>
+					<%}else if(el.times==2){%>
+						<span>L</span>
+					<%}%>
+				<%}else{%>
+					<%if (el.times==0) {%>
+						<span>古</span>
+					<%}else if(el.times==1){%>
+						<span>近</span>
+					<%}else if(el.times==2){%>
+						<span>今</span>
+					<%}%>
+				<%} %>
+			</span>
+
+
+			<ul class="list-unstyled">
+				
+				<%if (el.translateText!=''&&el.translateText!=null) {%>
+					<li data-toggle="collapse" data-target="#translateText" aria-expanded="true" aria-controls="translateText">
+						<span class="btn btn-link btn-sm">译文</span>
+						<div id="translateText" class="collapse col-sm-12">
+							<small><%-el.translateText.replace(/\r/ig,'<br/>').replace(/\n/ig,'<br/>')%></small>
+						</div>
+					</li>
+				<%}%>
+
+				<%if (el.annotation!=''&&el.annotation!=null) {%>
+					<li data-toggle="collapse" data-target="#annotation" aria-expanded="true" aria-controls="annotation">
+						<span class="btn btn-link btn-sm">注释</span>
+						<div id="annotation" class="collapse col-sm-12">
+							<small><%-el.annotation.replace(/\r/ig,'<br/>').replace(/\n/ig,'<br/>')%></small>
+						</div>
+					</li>
+				<%}%>
+
+				<%if (el.reference!=''&&el.reference!=null) {%>
+					<li data-toggle="collapse" data-target="#reference" aria-expanded="true" aria-controls="reference">
+						<span class="btn btn-link btn-sm">参考</span>
+						<div id="reference" class="collapse col-sm-12">
+							<small><%-el.reference.replace(/\r/ig,'<br/>').replace(/\n/ig,'<br/>')%></small>
+						</div>
+					</li>
+				<%}%>
+
+			</ul>
+
+			<a href="poems?id=<%=el.id%>&act=edit">
+				<span>编辑</span>
+			</a>
+			<a href="poems?id=<%=el.id%>&act=comments">
+				<span>
+					<%if (el.comments_num>=0) {%>
+						<span>评论<%-el.comments_num%></span>
+					<%}%>
+				</span>
+			</a>
+			<a href="handwriting?poemId=<%=el.id%>">诗笔迹</a>
+			<a href="poems?id=<%=el.id%>&act=voice">诗知音</a>
+			<a href="poems?act=correction">纠错</a>
+
+			<% })
+		 } %>
+
+
+
+		<!-- 编辑 -->
+		<% if(act_status==1 && rows.length>0){ 
+			rows.forEach(function(el){ %>
+			<div class="add-new-poem-div">
+				<p>
+					<input type="text" class="form-control poem-title text-capitalize" placeholder="诗的名字" value="<%=el.title%>">
+				</p>
+				<p>
+					<input type="text" class="form-control poem-penName text-capitalize"  placeholder="作者" value="<%=el.authorName%>">
+				</p>
+				<p>
+					<textarea class="form-control poem-content text-capitalize" rows="12" placeholder="诗的正文"><%-el.content%></textarea>
+				</p>
+
+				<p class="text-center">
+					<button class="btn btn-success btn-sm" poemId="<%=el.id%>" act-status="1" onclick="submit_poem_content(this)">提交编辑</button>
+				</p>
+				<%if(el.updated_at!=''&&el.updated_at!=null){%>
+					<p class="small">
+						<span>最近更改：<%-new Date(el.updated_at).Format("yyyy-MM-dd hh:mm:ss")%></span>
+					</p>
+				<%}%>
+				<%if(el.created_at!=''&&el.created_at!=null){%>
+					<p class="small">
+						<span>创建时间：<%-new Date(el.created_at).Format("yyyy-MM-dd hh:mm:ss")%></span>
+					</p>
+				<%}%>
+
+			</div>
+			<% })
+		 } %>
+
+
+		<!-- 新增 -->
+		<% if (act_status==2) { %>
+		<div class="add-new-poem-div">
+			<p>
+				<input type="text" class="form-control poem-title text-capitalize" placeholder="诗的名字">
+			</p>
+			<p>
+				<input type="text" class="form-control poem-penName text-capitalize"  placeholder="作者">
+			</p>
+			<p>
+				<textarea class="form-control poem-content text-capitalize" rows="12" placeholder="诗的正文"></textarea>
+			</p>
+			<p class="text-center">
+				<button class="btn btn-success btn-sm" act-status="2" onclick="submit_poem_content(this)">提交新增</button>
+			</p>
+
+		</div>
+		<% } %>
+
+		<!--  纠错 -->
+		<% if (act_status==3) { %>
+		<div class="add-new-poem-div">
+			<p>
+				<textarea type="text" class="form-control" rows="5"  placeholder="错误内容描述"></textarea>
+			</p>
+			<p>
+				<textarea type="text" class="form-control" rows="5"  placeholder="纠错意见"></textarea>
+			</p>
+			<p>
+				<input type="text" class="form-control" placeholder="参考文献/地址">
+			</p>
+			<p class="text-center">
+				<button class="btn btn-success btn-sm" act-status="3" onclick="submit_poem_content(this)">提交纠错</button>
+			</p>
+
+		</div>
+		<% } %>
+
+
+		<!-- 全局 -->
+		<p class="bg-info text-center hide">
+			
+		</p>
+		<p class="bg-success text-center hide">
+			<abbr title="attribute">attr</abbr>
+			<abbr title="HyperText Markup Language" class="initialism">HTML</abbr>
+			<p class="text-center hide">
+				<abbr>WePoem 微诗 CopyRight</abbr>
+			</p>
+		</p>
+
+		<p class="text-center hide" style="background: #5bc0de;">
+			<img src="" style="height:80px;" alt="">
+		</p>
+
+		<p class="hide">
+			<span>诗印象收录时声明的不成文的自定义的时代tag</span><br>
+			<span>中国诗:<strong>古</strong>(?-1840)|<strong>近</strong>(1840-parting)|<strong>今</strong>(living)</span><br>
+			<span>世界诗:<strong>A</strong>(?-1640)|<strong>P</strong>(1640-parting)|<strong>L</strong>(living)</span><br>
+			<span>中国∈世界</span>
+		</p>
+
+		
+	</div>
+
+</div>
+
+<script>
+	var rows = <%-JSON.stringify(rows)%>;
+	var act_status = <%-JSON.stringify(act_status)%>;
+
+
+</script>
+
+<%- include ../global/bottom.ejs %>
+
+<script src="js/poems/poem-edit-or-add.js"></script>
+<!-- <script src="js/poems/poem-detail.js"></script> -->
+<script src="js/poems/search.js"></script>
+
+<%- include ../global/footer.ejs %>

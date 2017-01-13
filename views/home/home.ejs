@@ -1,0 +1,309 @@
+<%- include ../global/header.ejs %>
+<%- include ../global/top.ejs %>
+<style>
+
+</style>
+<link rel="stylesheet" href="css/user/home.css">
+
+
+<div class="eidt-user-info-div hide">
+	<div class="eidt-user-info-h text-center">
+		<span class="back-btn" onclick="hide_eidt_user_info(this)">
+			<i class="icon icon-angle-left"></i>
+			<span>返回</span>
+		</span>
+		<span>个人信息</span>
+	</div>
+	<br>
+	<div class="home-info home-info-0">
+		<ul class="list-unstyled list-inline">
+			<li class="left-title">
+				<span>头像</span>
+			</li>
+			<li style="float:right;">
+				<img src="<%-qiniuDoname%><%-rs.avatar%>?imageView2/2/w/100/h/100" alt="">
+			</li>
+		</ul>
+	</div>
+	<br>
+	<div class="home-info home-info-1">
+		<ul class="list-unstyled list-inline">
+			<li class="left-title">
+				<span style="color:#000000!important;">用户名</span>
+			</li>
+			<li class="right-value">
+				<span><%-rs.userName%></span>
+				<%if(rs.grade>=3){%>
+					<span class="badge ok">管理员</span>
+				<%}else{%>
+					<span class="badge"></span>
+				<%}%>
+			</li>
+		</ul>
+	</div>
+	<div class="home-info home-info-1">
+		<ul class="list-unstyled list-inline">
+			<li class="left-title">
+				<span style="color:#000000!important;">微诗号</span>
+			</li>
+			<li class="right-value">
+				<%if(rs.in_unique_code!=null){%>
+						<span><%-rs.in_unique_code%></span>
+				<%}else{%>
+						<span class="">设置</span>
+				<%}%>
+			</li>
+		</ul>
+	</div>
+	<div class="home-info home-info-1 home-email" edit-type="email" onclick="edit_info_one(this)">
+		<ul class="list-unstyled list-inline">
+			<li class="left-title">
+				<span style="color:#000000!important;">邮箱</span>
+			</li>
+			<li class="right-value">
+				<span><%-rs.email%></span>
+				<%if(rs.email_status==1){%>
+					<span class="badge ok">已验证</span>
+				<%}else{%>
+					<span class="badge">未验证</span>
+				<%}%>
+			</li>
+		</ul>
+	</div>
+	<div class="home-info home-info-1 home-phone" edit-type="phone">
+		<ul class="list-unstyled list-inline">
+			<li class="left-title">
+				<span style="color:#000000!important;">手机号</span>
+			</li>
+			<li class="right-value">
+				<span><%-rs.phone%></span>
+				<span class="hide">
+					<%if(rs.phone_status==1){%>
+						<span class="badge ok">已验证</span>
+					<%}else{%>
+						<span class="badge">未验证</span>
+					<%}%>
+				</span>
+			</li>
+		</ul>
+	</div>
+	<br>
+	<div class="home-info home-info-1">
+		<ul class="list-unstyled list-inline">
+			<li class="left-title">
+				<span style="color:#000000!important;">笔名</span>
+			</li>
+			<li class="right-value">
+				<span><%-rs.penName%></span>
+			</li>
+		</ul>
+	</div>
+	<%if(rs.type>0){%>
+		<div class="home-info home-info-1">
+			<ul class="list-unstyled list-inline">
+				<li class="left-title">
+					<span style="color:#000000!important;">认证信息</span>
+				</li>
+				<li class="right-value">
+					<%if(rs.type==3){%>
+						<span class="badge ok">古代著名诗人</span>
+					<%}else if(rs.type==2){%>
+						<span class="badge ok">近代著名诗人</span>
+					<%}else if(rs.type==1){%>
+						<span class="badge ok">当今著名诗人</span>
+					<%}else{%>
+						<span class="badge ok"></span>
+					<%}%>
+				</li>
+			</ul>
+		</div>
+	<%}%>
+	<div class="home-info home-info-1">
+		<ul class="list-unstyled list-inline">
+			<li class="left-title">
+				<span style="color:#000000!important;">性别</span>
+			</li>
+			<li class="right-value">
+				<%if(rs.sex==0){%>
+					<span>女</span>
+				<%}else if(rs.sex==1){%>
+					<span>男</span>
+				<%}%>
+			</li>
+		</ul>
+	</div>
+	<div class="home-info home-info-1">
+		<ul class="list-unstyled list-inline">
+			<li class="left-title">
+				<span style="color:#000000!important;">所在城市</span>
+			</li>
+			<li class="right-value">
+				<span><%-rs.city%></span>
+			</li>
+		</ul>
+	</div>
+	<div class="home-info home-info-1">
+		<ul class="list-unstyled list-inline">
+			<li class="left-title">
+				<span style="color:#000000!important;">个性签名</span>
+			</li>
+			<li class="right-value">
+				<span><%-rs.signature%></span>
+			</li>
+		</ul>
+	</div>
+	<br>
+	<div class="home-info home-info-1" onclick="logout()">
+		<ul class="list-unstyled list-inline">
+			<li class="left-title">
+				<span style="color:#000000!important;">注销当前登录</span>
+			</li>
+		</ul>
+	</div>
+	<br>
+	<br>
+	<br>
+
+	<div class="info-edit-dev hide">
+		<div class="p-email text-center">
+			<p>
+				<%if(rs.email_status==1){%>
+					<span class="badge ok">已验证</span>
+				<%}else{%>
+					<span class="badge">未验证</span>
+				<%}%>
+			</p>
+			<p>
+				<input type="text" class="my-email" placeholder="邮箱">
+			</p>
+			
+			<%if(rs.email_status==1){%>
+				<p>
+					<input type="text" placeholder="登录密码">
+				</p>
+				<p>
+					<button>修改邮箱</button>
+				</p>
+				
+			<%}else{%>
+				<p>
+					<button onclick="sendEmailCode(this)">发送验证码到邮箱</button>
+				</p>
+				<p>
+					<input class="my-email-code" maxlength="4" type="tel" value="" placeholder="验证码">
+				</p>
+				<p>
+					<button onclick="verifyEmailCode(this)">确认验证</button>
+				</p>
+			<%}%>
+			<br>
+			<p>
+				<span class="btn btn-default btn-xs btn-close-m"><i class="icon icon-remove"></i></span>
+			</p>
+			<p class="some-tips"></p>
+			
+
+		</div>
+	</div>
+
+
+
+</div>
+
+<div class="container">
+
+	<div class="home-info home-info-0" onclick="show_eidt_user_info()">
+		<ul class="list-unstyled list-inline">
+			<li>
+				<img src="<%-qiniuDoname%><%-rs.avatar%>?imageView2/2/w/100/h/100" alt="">
+			</li>
+			<li class="user-name">
+				<p>
+					<strong><%-rs.userName%></strong>
+					&nbsp;
+					<!-- <small class="grey"><i class="icon icon-pencil"></i></small> -->
+				</p>
+				<%if (rs.in_unique_code!=null&&String(rs.in_unique_code).length>0) {%>
+					<p class="grey">
+						<span>微诗号:</span>
+						<span><%-rs.in_unique_code%></span>
+					</p>
+				<%}%>
+			</li>
+			<li class="grey" style="float:right;font-size:1.8rem;padding:2.22rem 1rem;">
+				<p>
+					<span><i class="icon icon-cog"></i></span>
+				</p>
+			</li>
+		</ul>
+	</div>
+
+	<div class="home-info home-info-1">
+		<ul class="list-unstyled list-inline">
+			<li class="left-title">
+				<span style="color:#03A9F4;"><i class="icon icon-magic"></i></span>
+				&nbsp;
+				<span style="color:#000000!important;">我写的诗</span>
+			</li>
+		</ul>
+	</div>
+
+	<a href="moments">
+	<div class="home-info home-info-1">
+		<ul class="list-unstyled list-inline">
+			<li class="left-title">
+				<span style="color:#03A9F4;"><i class="icon icon-coffee"></i></span>
+				&nbsp;
+				<span style="color:#000000!important;">诗友圈</span>
+			</li>
+		</ul>
+	</div>
+	</a>
+
+	<div class="home-info home-info-1">
+		<ul class="list-unstyled list-inline">
+			<li class="left-title">
+				<span style="color:#03A9F4;"><i class="icon icon-leaf"></i></span>
+				&nbsp;
+				<span style="color:#000000!important;">诗笔迹</span>
+			</li>
+		</ul>
+	</div>
+
+	<div class="home-info home-info-1">
+		<ul class="list-unstyled list-inline">
+			<li class="left-title">
+				<span style="color:#03A9F4;"><i class="icon icon-heart"></i></span>
+				&nbsp;
+				<span style="color:#000000!important;">我喜欢的诗</span>
+			</li>
+		</ul>
+	</div>
+
+	<div class="home-info home-info-1">
+		<ul class="list-unstyled list-inline">
+			<li class="left-title">
+				<span style="color:#03A9F4;"><i class="icon icon-book"></i></span>
+				&nbsp;
+				<span style="color:#000000!important;">我收藏的诗集</span>
+			</li>
+		</ul>
+	</div>
+
+
+
+</div>
+
+<script>
+	console.log(<%-JSON.stringify(qiniuDoname)%>);
+	console.log(<%-JSON.stringify(rs)%>);
+</script>
+
+<%- include ../global/bottom.ejs %>
+
+<script src="js/global/md5.js"></script>
+<script src="js/poems/search.js"></script>
+<script src="js/home/home.js"></script>
+
+
+<%- include ../global/footer.ejs %>

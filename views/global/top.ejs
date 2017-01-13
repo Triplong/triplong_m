@@ -1,0 +1,169 @@
+<style>
+	#search_more select{
+		width: 60px;
+	}
+</style>
+<div class="nav-common nav-top">
+	<ul class="col-sm-12 list-unstyled">
+		<a href="/">
+			<li class="text-left">
+				<span>
+					<i class="icon icon-angle-left"></i>
+					<span>首页</span>
+				</span>
+			</li>
+		</a>
+		<a href="javascript:;" onclick="showSearchDiv(this)">
+			<li class="text-center">
+				<span>
+					<i class="icon icon-search"></i>
+				</span>
+			</li>
+		</a>
+		<a href="javascript:;">
+			<li class="text-right">			 
+				<span class="login-info" onclick="login_or_home(this)">
+					<i class="icon icon-user"></i>
+					<span class="login-info-name"></span>
+				</span>
+			</li>
+		</a>
+	</ul>
+</div>
+
+<div class="global-search-div" style="display:none;">
+	<p class="text-center" style="padding:0 0 1rem 0;">
+		<a href="javascript:;" onclick="hideSearchDiv(this)">
+			<span style="font-size:2rem;">
+				<i class="icon icon-remove-sign"></i>
+			</span>
+		</a>
+	</p>
+	
+	<div class="col-lg-12">
+		<div class="input-group">
+		  <input type="text" class="form-control" placeholder="输入诗的名字/作者">
+		  <span class="input-group-btn" onclick="search_by_title(this)">
+		    <button class="btn btn-primary" type="button">搜索</button>
+		  </span>
+		</div><!-- /input-group -->
+	</div>
+	<div class="col-lg-12" data-toggle="collapse" data-target="#search_more" aria-expanded="true" aria-controls="search_more">
+		<span class="btn btn-link btn-sm" style="padding:0.5rem 0;">More</span>
+	</div>
+
+	<div id="search_more" class="collapse col-lg-12">
+		<ul class="list-unstyled list-inline">
+			<li>
+				<span>时代:</span>
+				<select name="" id="">
+					<option value="">不选</option>
+					<option value="">古(A)</option>
+					<option value="">近(P)</option>
+					<option value="">今(L)</option>
+				</select>
+			</li>
+			<li>
+				<span>国家:</span>
+				<select name="" id="">
+					<option value="">不选</option>
+					<template v-for="el in search_country">
+						<option value="{{el.id}}">{{el.c_name}}({{el.e_name}})</option>
+					</template>
+				</select>
+			</li>
+			<li>
+				<span>朝代:</span>
+				<select name="" id="">
+					<option value="">不选</option>
+					<template v-for="el in search_dynasty">
+						<option value="{{el.id}}">{{el.d_name}}({{el.start_y}}-{{el.end_y}})</option>
+					</template>
+				</select>
+			</li>
+		</ul>
+	</div>
+	<br>
+	
+	<!-- 列表 -->
+	<div class="col-lg-12 search_result">
+		<h5 v-if="search_poems.length>=0">
+			<span class="search_result_tips"></span>
+		</h5>
+		<h4 v-for="el in search_poems" class="text-left">
+			<a href="poems?id={{el.id}}">{{el.title}}</a>
+			<small>{{el.authorName}}</small>
+		</h4>
+	</div>
+	<br>
+	
+
+
+</div>
+
+<script>
+	var strCookie=$.cookie('loginInfo'),loginInfo; 
+	// console.log(strCookie);
+	if (strCookie!=undefined&&strCookie!=''&&strCookie!=null) {
+		strCookie = JSON.parse(strCookie);
+		// console.log(strCookie);
+		loginInfo = strCookie[0];
+		// console.log(loginInfo);
+		$('.login-info-name').text(loginInfo.userName).attr({
+			userId:loginInfo.id,
+			email:loginInfo.email,
+			token:loginInfo.token
+		});
+		get_like_file();
+	}else{
+		$('.login-info-name').text('登录');
+	}
+
+	function get_like_file () {
+		var form = {
+			targetTable:'hw_like',
+			targetField:'id,hw_fileId,like_userId,is_like',
+			targetMatch:'like_userId',
+			targetExtra:'',
+			targetId:loginInfo.id
+		}
+		// console.log(form);
+		var type = 'get',
+			url = 'admin/'+form.targetTable,
+			data = form;
+	    var rs = global_ajax(type,url,data);
+	    // console.log(rs);
+
+	    $(document).ready(function(){
+		    $('.handwriting-div .img-each').each(function(){
+		    	var fileId = Number($(this).attr('fileId'));
+		    	// console.log(fileId);
+		    	var that = this;
+		    	$.each(rs.rows,function(i,n){
+		    		if (n.hw_fileId==fileId) {
+		    			$(that).find('.img-operation > span').attr({
+		    				status:n.is_like,
+		    				like_id:n.id
+		    			});
+		    			if (n.is_like==1) {
+							$(that).find('.img-operation > span .icon').removeClass('icon-heart-empty').addClass('icon-heart');
+		    			}else{
+							$(that).find('.img-operation > span .icon').removeClass('icon-heart').addClass('icon-heart-empty');
+		    			}
+		    		}
+		    	})
+		    })
+	    })
+	}
+
+	function login_or_home(obj){
+		var userId = $(obj).find('.login-info-name').attr('userId');
+		if (userId>0) {
+			window.location.href='home?uid='+userId;
+		}else{
+			window.location.href='login';
+		}
+	}
+
+</script>
+

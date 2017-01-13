@@ -1,0 +1,113 @@
+
+html,body{
+	height: 100%;
+}
+body {
+    max-width: 500px!important;
+    margin: 0 auto!important;
+    font-size: 10px!important;
+}
+
+*,*:hover,*:active,*:visited,*:link,*:focus{
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
+    outline:none;
+    /*background: none;*/
+    text-decoration: none;
+}
+
+.msg-tips{
+	color: #ade0ef;
+}
+
+/*在IOS下，input 表单默认会有个内阴影，一定程度上影响视觉一致，可通过设置下面代码去掉：*/
+input,textarea{
+    -webkit-appearance: none;
+}
+
+hr{
+	width: 100%;
+	display: table;
+}
+
+.container{
+	min-height: 100%;
+	max-width: 100%;
+	background: #f6f6f1;
+	padding: 0;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+	background: #f6f6f1;
+}
+
+.lead{
+	font-size: 16px!important;
+}
+.nav-common{
+	height: 5rem;
+    background: -webkit-linear-gradient(left,#f4ffe9,#44BFFA);
+    background: linear-gradient(to right,#f4ffe9,#44BFFA);
+}
+.nav-common ul{
+	height: 5rem;
+	line-height: 5rem;
+	font-size: 1.5rem;
+	color: #f6f6f1;
+	margin: 0;
+	padding: 0;
+}
+.nav-common ul li{
+	width: 30%;
+	display: inline-block;
+	position: absolute;
+	padding: 0 15px;
+	height: 100%;
+}
+.nav-bottom ul li.text-center{
+	width: 100%;
+}
+
+.nav-common ul li.text-left{
+	left:0;
+}
+.nav-common ul li.text-center{
+	margin: auto;
+	left: 0;
+	right: 0
+}
+.nav-common ul li.text-right{
+	right:0;
+}
+.nav-bottom {
+    display: table;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+.global-search-div {
+    position: absolute;
+    width: 96%;
+    max-width: 480px;
+    margin: auto;
+    top: 1rem;
+    left: 0;
+    right: 0;
+    background: #f6f6f1;
+    border: solid 1px #cccccc;
+    border-radius: 3px;
+    z-index: 10;
+}
+.global-search-div p{
+	margin: 0;
+	padding: 1.5rem;
+}
+.global-search-div p input{
+	width: 80%;
+}
+#search_more ul li{
+	margin:0.5rem 0;
+}
+
+
+

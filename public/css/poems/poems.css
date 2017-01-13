@@ -1,0 +1,60 @@
+
+.data-poems-list{
+	font-size: 1.4rem;
+	width: 100%;
+	color: #614e3c;
+	padding:1.5rem;
+}
+.resize-full-btn {
+    position: absolute;
+	right: 3rem;
+}
+.resize-full-div .resize-full-btn{
+	top: 0rem;
+    right: 0rem;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 2rem 1rem 2rem 1.5rem;
+}
+.resize-full-div {
+	display: none;
+	position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    background: #ececec;
+    color: white;
+    /*text-shadow: black 0px 1px 1px;*/
+    z-index: 100;
+    overflow: scroll;
+    padding: 2rem;
+	  /* 增加该属性，可以增加弹性，是滑动更加顺畅 */
+	  -webkit-overflow-scrolling: touch;  
+    background-image: url();
+	background-repeat: no-repeat;
+	background-position: center center;
+    background-size: cover;
+}
+.resize-full-div .resize-full-btn span {
+    font-size: 2rem;
+    color: white!important;
+}
+.resize_full_content{
+	position: absolute;
+}
+
+.backupImg{
+	display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 0;
+}
+
+
+

@@ -1,0 +1,83 @@
+<%- include ../global/header.ejs %>
+<%- include ../global/top.ejs %>
+<style>
+	
+</style>
+<link rel="stylesheet" href="css/user/login.css">
+
+<div class="container">
+	
+	<div class="col-lg-12 text-center">
+
+		<%if (status==1) {%>
+		<div class="login-div login-1-div">
+			<h4>登录WePoem帐号</h4>
+			<p>
+				<input type="text" class=" mul-way" placeholder="邮箱" wayName="email">
+			</p>
+			<p>
+				<input type="password" class="" placeholder="密码" wayName="password">
+			</p>
+			<p>
+				<button class="" status="1" onclick="toLogin(this)">登 录</button>
+			</p>
+			<p>
+				<button class="no-bg">
+					<a href="login?status=0">木有帐号，注册一个</a>
+				</button>
+			</p>
+		</div>
+		<%}%>
+
+		<%if (status==0) {%>
+		<div class="login-div text-center login-0-div">
+			<h4>注册WePoem帐号</h4>
+			<p>
+				<input type="text" class=" mul-way" placeholder="邮箱" wayName="email">
+			</p>
+			<p>
+				<input type="password" class="" placeholder="密码" wayName="password">
+			</p>
+			<p>
+				<input type="password" class="" placeholder="确认密码" wayName="repassword">
+			</p>
+			<p>
+				<button class="" status="0" onclick="toLogin(this)">提交注册</button>
+			</p>
+			<p>
+				<button class="no-bg">
+					<a href="login?status=1">已有帐号，去登录</a>
+				</button>
+			</p>
+
+		</div>
+		<%}%>
+
+
+		<!-- <hr> -->
+		<p class="login-3f hide">
+			<span>其他方式登录:</span>
+			<span class="iconfont i-weixin" loginStyle="0" onclick="login_3f(this)">
+				<img src="img/iconfont/weixin_0.png" alt="">
+				<span>微信登录</span>
+			</span>
+			<span class="iconfont i-weibo" loginStyle="1" onclick="login_3f(this)">
+				<img src="img/iconfont/weibo_0.png" alt="">
+				<span>微博登录</span>
+			</span>
+		</p>
+		<!-- <hr> -->
+
+	</div>
+
+</div>
+
+
+<%- include ../global/bottom.ejs %>
+
+<script src="js/global/md5.js"></script>
+<script src="js/user/login.js"></script>
+<script src="js/poems/search.js"></script>
+
+
+<%- include ../global/footer.ejs %>

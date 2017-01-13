@@ -1,0 +1,218 @@
+<%- include ../global/header.ejs %>
+<%- include ../global/top.ejs %>
+
+
+<style>
+.nav-common{
+	display: none;
+}
+.avatar-info {
+    height: 20rem;
+    display: -webkit-box;
+}
+.moments-avatar{
+    width: 8rem;
+    height: 8rem;
+    border-radius: 2px;
+    border: solid 2px #f6f6f1;
+    position: absolute;
+    margin-left: -10rem;
+    top: 15rem;
+}
+.moments-userName{
+    position: absolute;
+    margin-left: -17rem;
+    font-size: 1.8rem;
+    top: 17rem;
+    color: white;
+    text-shadow: 0 1px 1px black;
+}
+
+.blur {    
+	filter: url(blur.svg#blur); /* FireFox, Chrome, Opera */
+    -webkit-filter: blur(30px); /* Chrome, Opera */
+       -moz-filter: blur(30px);
+         -o-filter: blur(30px);
+        -ms-filter: blur(30px);    
+            filter: blur(30px);  
+			filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false); /* IE6~IE9 */  
+}
+.right-top-camera {
+    position: absolute;
+    top: 2rem;
+    font-size: 2.0rem;
+    margin-left: -4.5rem;
+    color: white;
+    text-shadow: 0px 0px 5px #666666;
+    opacity: .8;
+}
+.left-bottom-friends{
+    position: absolute;
+    top: 16.5rem;
+    font-size: 2.0rem;
+    margin-left: 1.5rem;
+    color: white;
+    text-shadow: 0px 0px 5px #666666;
+    opacity: .8;
+    display: table;
+}
+.rotate{
+    -moz-animation:rotate .5s infinite linear;
+    -webkit-animation:rotate .5s infinite linear;
+    animation:rotate .5s infinite linear;
+}
+  @-moz-keyframes rotate{
+    0%{
+      -moz-transform:rotate(0deg);
+     }
+     100%{
+       -moz-transform:rotate(360deg);
+     }
+  }
+  @-webkit-keyframes rotate{
+    0%{
+      -webkit-transform:rotate(0deg);
+     }
+     100%{
+       -webkit-transform:rotate(360deg);
+     }
+  }
+  @keyframes rotate{
+    0%{
+      transform:rotate(0deg);
+     }
+     100%{
+       transform:rotate(360deg);
+     }
+  }
+
+.new-moments-div {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: #ffffff;
+    font-size: 1.6rem;
+    top: 0;
+    max-width: 500px;
+    margin: 0 auto;
+}
+.moments-content {
+    border: none;
+    resize: none;
+    height: 10rem;
+    overflow-y: scroll;
+    border-radius: 0;
+    font-size: 1.6rem;
+    padding: 1.5rem;
+}
+.add-img-btn{
+    display: inline-block;
+	width: 6rem;
+    height: 6rem;
+    border: solid 1px #d4d4d4;
+    text-align: center;
+    font-size: 6rem;
+    font-weight: lighter;
+    color: #d4d4d4;
+    vertical-align: middle;
+    line-height: 4.8rem;
+}
+.add-img-p{
+    padding: 1.5rem;
+    background: white;
+    border-radius: 0;
+    border-bottom: solid 1px #d4d4d4;
+}
+
+
+</style>
+<link rel="stylesheet" href="">
+
+<div class="container">
+
+	<template v-for="el in user_info">
+		<div class="col-lg-12 avatar-info" v-bind:style="'padding:0;background-image: url('+qiniuDoname+el.avatar+'?imageView2/2/w/500);background-repeat: no-repeat;background-size: cover;background-position: center;'"></div>
+		<p class="text-right" style="width:100%;">
+      <a href="home?uid={{el.id}}">
+        <span class="moments-userName">{{el.userName}}</span>
+        <img class="moments-avatar" v-bind:src="qiniuDoname+el.avatar+'?imageView2/1/w/100/h/100'" alt="">
+      </a>
+		</p>
+		<p class="text-right">
+			<span onclick="show_new_moments()" class="right-top-camera"><i class="icon icon-camera"></i></span>
+		</p>
+    <a href="friends?uid={{el.id}}">
+      <p class="text-left">
+        <span class="left-bottom-friends"><i class="icon icon-group"></i></span>
+      </p>
+    </a>
+
+	</template>
+
+	<div class="new-moments-div hide">
+		<textarea class="moments-content" cols="30" rows="10" placeholder="这一刻的诗想..." style="width:100%"></textarea>
+		<p class="add-img-p">
+      <form id="form1" enctype="multipart/form-data" method="post" action="" class="text-center">
+        <select name="" id="uploadType" class="hide">
+          <option value="3">诗友圈</option>
+          <option value="2">背景图</option>
+          <option value="1">诗笔迹</option>
+        </select>
+  			<span class="add-img-btn" onclick="add_img(this)">+</span>
+        <input type="file" name="qiniu_upload_file" id="qiniu_upload_file" onchange="uploadMyHaddwriting()" multiple="multiple" class="upload-file hide">
+      </form>
+		</p>
+		<p class="col-lg-12">
+			<span>所在位置</span>
+		</p>
+		<br><br>
+		<p class="text-center">
+			<span onclick="hide_new_moments()">close</span>
+		</p>
+	</div>
+
+
+	<div class="user-info" style="width:100%">
+	
+		<hr>
+		<hr>
+		<hr>
+		<hr>
+		<hr>
+		<hr>
+		<hr>
+		<hr>
+		<hr>
+		<hr>
+		<hr>
+		<hr>
+		<hr>
+		<hr>
+		<hr>
+		<hr>
+		<hr>
+
+
+
+
+
+
+
+
+
+
+		
+	</div>
+
+</div>
+
+
+<%- include ../global/bottom.ejs %>
+
+<script src="js/user/login.js"></script>
+<script src="js/poems/search.js"></script>
+<script src="js/basic/qiniu-upload.js"></script>
+<script src="js/user/moments.js"></script>
+
+
+<%- include ../global/footer.ejs %>

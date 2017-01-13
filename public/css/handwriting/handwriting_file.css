@@ -1,0 +1,68 @@
+
+
+h3,h4,p{
+	margin:5px 0px 15px;
+}
+
+.handwriting-div img,
+.handwriting-div video {
+    width: 100%;
+}
+
+.label-default > span {
+    margin: 0 0.5rem;
+}
+i.icon.icon-heart {
+    color: #ff7d7d;
+    text-shadow: #3c3c3c 0px 0px 2px;
+}
+.img-operation {
+    position: absolute;
+    right: 15px;
+    margin-top: -50px;
+    font-size: 1.6rem;
+}
+.img-operation {
+    background-color: rgba(91, 192, 222, 0.5);
+}
+
+.badge {
+    background-color: rgba(91, 192, 222, 0.5);
+}
+.icon-info-sign{
+	color: rgba(91, 192, 222, 0.5);
+}
+
+.float-left{
+    float: left;
+}
+.float-right{
+    float: right;
+}
+
+.btn-pre-publish{
+    font-size: 1.5rem;
+    padding: 0 0.6rem;
+    border-radius: 2px;
+    color: rgba(128, 128, 128, 0.5);
+    margin: 10px 0;
+}
+
+.upload-new-hw-div {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: white;
+    z-index: 11;
+    top: 0;
+}
+.new-hw-header {
+    height: 44px;
+    line-height: 44px;
+    font-size: 1.6rem;
+    border-bottom: solid 1px rgba(128, 128, 128, 0.25);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+}
