@@ -23,6 +23,12 @@ router.get('/',function (req,res,next){
   res.render('index/pc', renderData);
 });
 
+router.get('/pc.html',function (req,res,next){
+  var renderData = {
+    title: "triplong"
+  };
+  res.render('index/pc', renderData);
+});
 
 
 // 登录/注册
@@ -37,6 +43,7 @@ router.get('/login', function (req, res, next) {
 	};
 	res.render('user/login', renderData);
 });
+
 
 
 
