@@ -3,7 +3,7 @@ html,body{
 	height: 100%;
 }
 body {
-    max-width: 500px!important;
+    /*max-width: 500px!important;*/
     margin: 0 auto!important;
     font-size: 10px!important;
 }
@@ -33,7 +33,7 @@ hr{
 .container{
 	min-height: 100%;
 	max-width: 100%;
-	background: #f6f6f1;
+	/*background: #f6f6f1;*/
 	padding: 0;
 }
 
@@ -46,6 +46,12 @@ hr{
 }
 .nav-common{
 	height: 5rem;
+    /*background: -webkit-linear-gradient(left,#f4ffe9,#44BFFA);*/
+    /*background: linear-gradient(to right,#f4ffe9,#44BFFA);*/
+}
+.bg-line{
+	width: 100%;
+	height: 0.2rem;
     background: -webkit-linear-gradient(left,#f4ffe9,#44BFFA);
     background: linear-gradient(to right,#f4ffe9,#44BFFA);
 }

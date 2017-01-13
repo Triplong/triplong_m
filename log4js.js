@@ -4,13 +4,13 @@ var app = express();
 //需要在各自的环境运行
 if (app.get('env') === 'development'){
     //开发环境 export NODE_ENV=development
-    filename = '../logs/node-wepoem-m/log'
+    filename = '../logs/node-triplong-m/log'
 }else if (app.get('env') === 'production'){
     // 生产环境 export NODE_ENV=production
-    filename = '../logs/node-wepoem-m/log'
+    filename = '../logs/node-triplong-m/log'
 }else if (app.get('env') === 'localhost'){
     // 本地 export NODE_ENV=localhost
-    filename = '../logs/node-wepoem-m/log'
+    filename = '../logs/node-triplong-m/log'
 }
 
 

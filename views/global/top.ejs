@@ -8,21 +8,14 @@
 		<a href="/">
 			<li class="text-left">
 				<span>
-					<i class="icon icon-angle-left"></i>
-					<span>首页</span>
+					<img src="img/triplong_logo.png" alt="" style="width:10rem;">
 				</span>
 			</li>
 		</a>
-		<a href="javascript:;" onclick="showSearchDiv(this)">
-			<li class="text-center">
-				<span>
-					<i class="icon icon-search"></i>
-				</span>
-			</li>
-		</a>
+
 		<a href="javascript:;">
 			<li class="text-right">			 
-				<span class="login-info" onclick="login_or_home(this)">
+				<span class="login-info hide" onclick="login_or_home(this)">
 					<i class="icon icon-user"></i>
 					<span class="login-info-name"></span>
 				</span>
@@ -30,76 +23,8 @@
 		</a>
 	</ul>
 </div>
+<div class="bg-line"></div>
 
-<div class="global-search-div" style="display:none;">
-	<p class="text-center" style="padding:0 0 1rem 0;">
-		<a href="javascript:;" onclick="hideSearchDiv(this)">
-			<span style="font-size:2rem;">
-				<i class="icon icon-remove-sign"></i>
-			</span>
-		</a>
-	</p>
-	
-	<div class="col-lg-12">
-		<div class="input-group">
-		  <input type="text" class="form-control" placeholder="输入诗的名字/作者">
-		  <span class="input-group-btn" onclick="search_by_title(this)">
-		    <button class="btn btn-primary" type="button">搜索</button>
-		  </span>
-		</div><!-- /input-group -->
-	</div>
-	<div class="col-lg-12" data-toggle="collapse" data-target="#search_more" aria-expanded="true" aria-controls="search_more">
-		<span class="btn btn-link btn-sm" style="padding:0.5rem 0;">More</span>
-	</div>
-
-	<div id="search_more" class="collapse col-lg-12">
-		<ul class="list-unstyled list-inline">
-			<li>
-				<span>时代:</span>
-				<select name="" id="">
-					<option value="">不选</option>
-					<option value="">古(A)</option>
-					<option value="">近(P)</option>
-					<option value="">今(L)</option>
-				</select>
-			</li>
-			<li>
-				<span>国家:</span>
-				<select name="" id="">
-					<option value="">不选</option>
-					<template v-for="el in search_country">
-						<option value="{{el.id}}">{{el.c_name}}({{el.e_name}})</option>
-					</template>
-				</select>
-			</li>
-			<li>
-				<span>朝代:</span>
-				<select name="" id="">
-					<option value="">不选</option>
-					<template v-for="el in search_dynasty">
-						<option value="{{el.id}}">{{el.d_name}}({{el.start_y}}-{{el.end_y}})</option>
-					</template>
-				</select>
-			</li>
-		</ul>
-	</div>
-	<br>
-	
-	<!-- 列表 -->
-	<div class="col-lg-12 search_result">
-		<h5 v-if="search_poems.length>=0">
-			<span class="search_result_tips"></span>
-		</h5>
-		<h4 v-for="el in search_poems" class="text-left">
-			<a href="poems?id={{el.id}}">{{el.title}}</a>
-			<small>{{el.authorName}}</small>
-		</h4>
-	</div>
-	<br>
-	
-
-
-</div>
 
 <script>
 	var strCookie=$.cookie('loginInfo'),loginInfo; 
